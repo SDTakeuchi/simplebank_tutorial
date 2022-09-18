@@ -1,0 +1,58 @@
+version: "3.9"
+services:
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=simple_bank
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin4:
+    image: dpage/pgadmin4
+    ports:
+        - 8888:80
+    volumes:
+        - pgadmin4_data:/var/lib/pgadmin
+    environment:
+        PGADMIN_DEFAULT_EMAIL: 123@gmail.com
+        PGADMIN_DEFAULT_PASSWORD: password
+    depends_on:
+      - postgres
+
+  api:
+    image: golang:1.19.1-buster
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./:/go/src
+
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     - DB_SOURCE=postgresql://root:secret@postgres:5432/simple_bank?sslmode=disable
+  #   depends_on:
+  #     - postgres
+  #   entrypoint:
+  #     [
+  #       "/app/wait-for.sh",
+  #       "postgres:5432",
+  #       "--",
+  #       "/app/start.sh"
+  #     ]
+  #   command: [ "/app/main" ]
+
+volumes:
+    postgres_data:
+    pgadmin4_data:
