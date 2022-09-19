@@ -20,6 +20,8 @@ var testDB *sql.DB
 var dbConfig = fmt.Sprintf(
 	"host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
 	"localhost",
+	// for localtest
+	// "postgres",
 	"5432",
 	"root",
 	"simple_bank",
