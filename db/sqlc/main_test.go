@@ -10,13 +10,13 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var testQueries *Queries
-
 const (
 	dbDriver = "postgres"
 	// dbSource = "postgres://root:secret@localhost:5432/simple_bank?sslmode=disable"
 )
 
+var testQueries *Queries
+var testDB *sql.DB
 var dbConfig = fmt.Sprintf(
 	"host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
 	"postgres",
@@ -28,12 +28,13 @@ var dbConfig = fmt.Sprintf(
 )
 
 func TestMain(m *testing.M) {
-	conn, err := sql.Open(dbDriver, dbConfig)
+	var err error
+	testDB, err = sql.Open(dbDriver, dbConfig)
 	if err != nil {
 		log.Fatal("cannot connect to database")
 	}
 
-	testQueries = New(conn)
+	testQueries = New(testDB)
 
 	os.Exit(m.Run())
 }
