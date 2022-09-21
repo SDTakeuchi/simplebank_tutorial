@@ -7,11 +7,11 @@ import (
 )
 
 type Server struct {
-	store  *db.Store
+	store  db.Store  // used to be "store  *db.Store" (with star) because it was defined as struct instaed of interface
 	router *gin.Engine
 }
 
-func NewServer(store *db.Store) *Server {
+func NewServer(store db.Store) *Server {
 	server := &Server{store: store}
 	router := gin.Default()
 
