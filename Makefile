@@ -47,6 +47,9 @@ server:
 mock:
 	mockgen -package mockdb -destination db/mock/store.go github.com/techschool/simplebank/db/sqlc Store
 
+up:
+	docker-compose up
+
 proto:
 	rm -f pb/*.go
 	rm -f doc/swagger/*.swagger.json
