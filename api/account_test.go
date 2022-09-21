@@ -31,9 +31,9 @@ func TestGetAccountAPI(t *testing.T) {
 			accountID: account.ID,
 			buildStubs: func(store *mockdb.MockStore) {
 				// build stubs
-				store.EXPECT().
+				store.EXPECT(). // EXPECT() means "I expect this test case to be something like this"
 					GetAccount(gomock.Any(), gomock.Eq(account.ID)).
-					Times(1). // means this function gets called n times
+					Times(1). // means that I EXPECT this function to be called n times
 					Return(account, nil)
 			},
 			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
