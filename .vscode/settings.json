@@ -19,7 +19,7 @@
     },
     "gopls": {
         // Add parameter placeholders when completing a function.
-        "usePlaceholders": true,
+        "usePlaceholders": false,
 
         // If true, enable additional analyses with staticcheck.
         // Warning: This will significantly increase memory usage.
