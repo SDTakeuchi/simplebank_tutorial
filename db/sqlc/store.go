@@ -91,6 +91,7 @@ func (store *SQLStore) TransferTx(ctx context.Context, arg TransferTxParams) (Tr
 		}
 
 		// account_idが古い順に処理をしたいってこと？ (このifの分岐の必要性が分からない)
+		// Answer: IDが古い順で処理するからトランザクションdead lockを回避できる
 		if arg.FromAccountID < arg.ToAccountID {
 			result.FromAccount, result.ToAccount, err = addMoney(ctx, q, arg.FromAccountID, -arg.Amount, arg.ToAccountID, arg.Amount)
 		} else {
