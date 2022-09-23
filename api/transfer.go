@@ -10,9 +10,9 @@ import (
 )
 
 type transferRequest struct {
-	FromAccountID int64  `json:"from_account_id" biding:"required,min=1"`
-	ToAccountID   int64  `json:"to_account_id" biding:"required,min=1"`
-	Amount      int64  `json:"amount" biding:"required,gt=0"`
+	FromAccountID int64 `json:"from_account_id" biding:"required,min=1"`
+	ToAccountID   int64 `json:"to_account_id" biding:"required,min=1"`
+	Amount        int64 `json:"amount" biding:"required,gt=0"`
 	// Because custom validator is implemented in server.go, we change the biding here
 	// @server.go - v.RegisterValidation("currency", validCurrency)
 	// Currency string `json:"currency" binding:"required,oneof=USD EUR"`
@@ -36,8 +36,8 @@ func (server *Server) createTransfer(ctx *gin.Context) {
 
 	arg := db.TransferTxParams{
 		FromAccountID: req.FromAccountID,
-		ToAccountID: req.ToAccountID,
-		Amount: req.Amount,
+		ToAccountID:   req.ToAccountID,
+		Amount:        req.Amount,
 	}
 
 	result, err := server.store.TransferTx(ctx, arg)

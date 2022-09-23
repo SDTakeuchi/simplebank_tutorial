@@ -27,14 +27,14 @@ func TestGetAccountAPI(t *testing.T) {
 		checkResponse func(t *testing.T, recorder *httptest.ResponseRecorder)
 	}{
 		{
-			name: "OK",
+			name:      "OK",
 			accountID: account.ID,
 			buildStubs: func(store *mockdb.MockStore) {
 				// build stubs
 				store.EXPECT(). // EXPECT() means "I expect this test case to be something like this"
-					GetAccount(gomock.Any(), gomock.Eq(account.ID)).
-					Times(1). // means that I EXPECT this function to be called n times
-					Return(account, nil)
+						GetAccount(gomock.Any(), gomock.Eq(account.ID)).
+						Times(1). // means that I EXPECT this function to be called n times
+						Return(account, nil)
 			},
 			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusOK, recorder.Code)
@@ -42,28 +42,28 @@ func TestGetAccountAPI(t *testing.T) {
 			},
 		},
 		{
-			name: "NotFound",
+			name:      "NotFound",
 			accountID: account.ID,
 			buildStubs: func(store *mockdb.MockStore) {
 				// build stubs
 				store.EXPECT().
 					GetAccount(gomock.Any(), gomock.Eq(account.ID)).
 					Times(1).
-					Return(db.Account{}, sql.ErrNoRows)  // returns empty struct
+					Return(db.Account{}, sql.ErrNoRows) // returns empty struct
 			},
 			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusNotFound, recorder.Code)
 			},
 		},
 		{
-			name: "InternalError",
+			name:      "InternalError",
 			accountID: account.ID,
 			buildStubs: func(store *mockdb.MockStore) {
 				// build stubs
 				store.EXPECT().
 					GetAccount(gomock.Any(), gomock.Eq(account.ID)).
 					Times(1).
-					Return(db.Account{}, sql.ErrConnDone)  // internal error means error connection
+					Return(db.Account{}, sql.ErrConnDone) // internal error means error connection
 			},
 			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusInternalServerError, recorder.Code)
@@ -71,13 +71,13 @@ func TestGetAccountAPI(t *testing.T) {
 			},
 		},
 		{
-			name: "InvalidID",
-			accountID: 0,  // invalid value for account ID
+			name:      "InvalidID",
+			accountID: 0, // invalid value for account ID
 			buildStubs: func(store *mockdb.MockStore) {
 				// build stubs
 				store.EXPECT().
 					GetAccount(gomock.Any(), gomock.Any()).
-					Times(0)  // should not be called by the handler since ID is invalid
+					Times(0) // should not be called by the handler since ID is invalid
 			},
 			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusBadRequest, recorder.Code)
@@ -91,7 +91,7 @@ func TestGetAccountAPI(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()
-	
+
 			store := mockdb.NewMockStore(ctrl)
 			tc.buildStubs(store)
 

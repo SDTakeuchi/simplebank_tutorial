@@ -9,7 +9,7 @@ import (
 )
 
 type Server struct {
-	store  db.Store  // used to be "store  *db.Store" (with star) because it was defined as struct instaed of interface
+	store  db.Store // used to be "store  *db.Store" (with star) because it was defined as struct instaed of interface
 	router *gin.Engine
 }
 

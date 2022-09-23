@@ -50,6 +50,9 @@ mock:
 up:
 	docker-compose up
 
+git:
+	git add . && git restore app.env --staged && git commit -m "$(ARG)" && git push
+
 proto:
 	rm -f pb/*.go
 	rm -f doc/swagger/*.swagger.json
