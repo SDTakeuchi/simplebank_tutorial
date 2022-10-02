@@ -12,10 +12,10 @@ import (
 )
 
 type transferRequest struct {
-	FromAccountID int64 `json:"from_account_id" biding:"required,min=1"`
-	ToAccountID   int64 `json:"to_account_id" biding:"required,min=1"`
-	Amount        int64 `json:"amount" biding:"required,gt=0"`
-	// Because custom validator is implemented in server.go, we change the biding here
+	FromAccountID int64 `json:"from_account_id" binding:"required,min=1"`
+	ToAccountID   int64 `json:"to_account_id" binding:"required,min=1"`
+	Amount        int64 `json:"amount" binding:"required,gt=0"`
+	// Because custom validator is implemented in server.go, we change the binding here
 	// @server.go - v.RegisterValidation("currency", validCurrency)
 	// Currency string `json:"currency" binding:"required,oneof=USD EUR"`
 	Currency string `json:"currency" binding:"required,currency"`
