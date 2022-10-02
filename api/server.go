@@ -48,7 +48,7 @@ func (server *Server) setupRouter() {
 
 	authRoutes.POST("/accounts", server.createAccount)
 	authRoutes.GET("/accounts/:id", server.getAccount)
-	authRoutes.GET("/accounts", server.listAccount)
+	authRoutes.GET("/accounts", server.listAccounts)
 	// router.PUT("/accounts/:id", server.updateAccount) // TODO: implement
 	// router.DELETE("/accounts/:id", server.deleteAccount) // TODO: implement
 
