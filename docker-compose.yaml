@@ -23,17 +23,6 @@ services:
     depends_on:
       - postgres
 
-  # api:
-  #   image: golang:1.19.1-buster
-  #   ports:
-  #     - 8080:8080
-  #   depends_on:
-  #     - postgres
-  #   tty: true
-  #   stdin_open: true
-  #   volumes:
-  #     - ./:/go/src
-
   api:
     build:
       context: .
