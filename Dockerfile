@@ -16,6 +16,8 @@ COPY start.sh .
 COPY wait-for.sh .
 COPY db/migration ./migration
 
+RUN chmod +x /app/start.sh
+
 EXPOSE 8080
 # when CMD is used with ENTRYPOINT,
 # it will act as an additional params
