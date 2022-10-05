@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+
+kind: IngressClass
+
+metadata:
+  name: nginx
+
+spec:
+  controller: k8s.io/ingress-nginx
+
+# triple dashes are used to separate two yaml files
+---
+
+apiVersion: networking.k8s.io/v1
+
+kind: Ingress
+
+metadata:
+  name: simple-bank-ingress
+
+spec:
+# should match the value of metadata.name written above
+  ingressClassName: nginx
+  rules:
+  - host: "api.simple-bank.click"
+    http:
+      paths:
+      # set target path
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+          # got to be matched with the name of "Services" metadata neme
+            name: simple-bank-api-service
+            port:
+              number: 80

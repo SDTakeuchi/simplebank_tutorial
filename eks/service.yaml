@@ -16,4 +16,4 @@ spec:
       # where the request is sent to
       # incoming requests comes to PORT:80 and forwarded to simple-bank-api:8080
       targetPort: 8080
-  type: LoadBalancer
+  type: ClusterIP
