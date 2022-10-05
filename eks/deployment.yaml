@@ -1,0 +1,31 @@
+# tells kubernetes version
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: simple-bank-api-deployment
+  # key-value pairs for users to organize subsets of objects
+  labels:
+    app: simple-bank-api
+# main specification of deployment objects
+spec:
+  # number of pods that runs with the same templates
+  replicas: 2
+  # rules that defines how the deployment can find which pods to manage
+  selector:
+    matchLabels:
+      # means all pods that have "simple-bank-api" will be managed by this deployment
+      app: simple-bank-api
+  template:
+    metadata:
+      labels:
+        app: simple-bank-api
+    spec:
+      # tells kubernetes how to deploy our containers
+      containers:
+      - name: simple-bank-api
+        # container URI can be fetched at Amazon ECR > Repositories > detials
+        image: 082592591122.dkr.ecr.ap-northeast-1.amazonaws.com/simplebank:e0f77a3482733a29e4d8f72b423545b1e09896e0
+        ports:
+        - containerPort: 8080
