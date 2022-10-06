@@ -42,8 +42,8 @@ jobs:
         REPOSITORY: simplebank
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -t $ECR_REGISTORY/$ECR_REPOSITORY:latest .
-        docker push -a $REGISTRY/$REPOSITORY
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+        docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
     # fixes issue that kubernetes search for clusters in LOCAL environment instead of PRD environment.
     # so giving the PRD config name and region
