@@ -27,5 +27,8 @@ spec:
       - name: simple-bank-api
         # container URI can be fetched at Amazon ECR > Repositories > detials
         image: 082592591122.dkr.ecr.ap-northeast-1.amazonaws.com/simplebank:latest
+        # makes sure that kubernetes pulls literaly the latest image
+        # (without it, "image: 082592591122.dkr.ecr.ap-northeast-1.amazonaws.com/simplebank:latest" attaches same "latest" tag to all images)
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
