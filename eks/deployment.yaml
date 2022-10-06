@@ -26,6 +26,6 @@ spec:
       containers:
       - name: simple-bank-api
         # container URI can be fetched at Amazon ECR > Repositories > detials
-        image: 082592591122.dkr.ecr.ap-northeast-1.amazonaws.com/simplebank:e0f77a3482733a29e4d8f72b423545b1e09896e0
+        image: 082592591122.dkr.ecr.ap-northeast-1.amazonaws.com/simplebank:latest
         ports:
         - containerPort: 8080
