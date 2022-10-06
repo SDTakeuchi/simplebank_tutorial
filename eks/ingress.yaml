@@ -17,6 +17,8 @@ kind: Ingress
 
 metadata:
   name: simple-bank-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
 
 spec:
 # should match the value of metadata.name written above
@@ -34,3 +36,7 @@ spec:
             name: simple-bank-api-service
             port:
               number: 80
+  tls:
+  - hosts:
+    - api.simple-bank.click
+    secretName: simple-bank-api-cert
