@@ -1,2 +1,4 @@
 app.env
 .credentials
+dev_container/docker-compose.yaml
+dev_container/docker/Dockerfile
